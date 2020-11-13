@@ -51,12 +51,12 @@ export default App;
 */
 
 import React, { useState } from "react";
-import { UseNewsSearch } from "./UseNewsSearch";
+import { NewsTitle } from "./NewsTitle";
 
 function App() {
   return (
     <div>
-      <UseNewsSearch />
+      <NewsTitle />
     </div>
   );
 }

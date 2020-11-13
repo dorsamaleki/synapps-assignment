@@ -47,7 +47,7 @@ export const UseNewsSearch = (query, pageNumber) => {
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-export const UseNewsSearch = () => {
+export const NewsTitle = () => {
   const [news, setNews] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   var url =
@@ -71,7 +71,7 @@ export const UseNewsSearch = () => {
     // a fake async api call like which sends
     // 20 more records in .5 secs
     setTimeout(() => {
-      setNews(news.concat(Array.from({ length: 5 })));
+      setNews(news.concat(Array.from({ length: 20 })));
     }, 500);
   };
 
