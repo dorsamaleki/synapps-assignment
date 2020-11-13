@@ -47,13 +47,6 @@ export const UseNewsSearch = (query, pageNumber) => {
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-const style = {
-  height: 30,
-  border: "1px solid green",
-  margin: 6,
-  padding: 8,
-};
-
 export const UseNewsSearch = () => {
   const [news, setNews] = useState([]);
   const [hasMore, setHasMore] = useState(true);
@@ -78,7 +71,7 @@ export const UseNewsSearch = () => {
     // a fake async api call like which sends
     // 20 more records in .5 secs
     setTimeout(() => {
-      setNews(news.concat(Array.from({ length: 20 })));
+      setNews(news.concat(Array.from({ length: 5 })));
     }, 500);
   };
 
@@ -89,7 +82,6 @@ export const UseNewsSearch = () => {
         next={fetchMoreData}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
-        height={400}
         endMessage={
           <p style={{ textAlign: "center" }}>
             <b>Yay! You have seen it all</b>
@@ -97,10 +89,8 @@ export const UseNewsSearch = () => {
         }
         // below props only if you need pull down functionality
       >
-        {news.map((item, index) => (
-          <div style={style} key={index}>
-            {item.title}
-          </div>
+        {news.map((item) => (
+          <div> {item.title}</div>
         ))}
       </InfiniteScroll>
     </div>
