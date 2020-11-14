@@ -3,8 +3,9 @@ import { uniq } from "lodash";
 import styles from "./NewsSource.module.css";
 export const NewsSource = (props) => {
   const [sourceList, setSourceList] = useState([]);
+
   var getUrl = (page) =>
-    `http://newsapi.org/v2/sources?&apiKey=969be8c2e9374ffcb2510f892c53bb04`;
+    `http://newsapi.org/v2/sources?&apiKey=07bd893c0bd947fbba9a7ec91ce34cf6`;
   useEffect(() => {
     fetch(getUrl())
       .then((response) => response.json())
@@ -13,12 +14,17 @@ export const NewsSource = (props) => {
 
   // fetch sources
   // languages = uniq source.language
+  console.log(typeof sourceList);
+  console.log(sourceList);
+  const languagesList = uniq(
+    sourceList.reduce((result, item) => {
+      return result.concat(item.language);
+    }, [])
+  );
 
-  const f = uniq(sourceList.map((item) => item.language));
   return (
     <div>
-      ////////
-      <div className={styles.f}>{f}</div>
+      <div>{languagesList}</div>
       <label for="sources">News Source</label>
       <select
         onChange={(event) => props.setSelectedSource(event.target.value)}
@@ -28,7 +34,9 @@ export const NewsSource = (props) => {
 
         {/* {sources.map()} */}
         {sourceList.map((item, index) => (
-          <option value={item.name}>{item.name}</option>
+          <option value={item.name} key={index}>
+            {item.name}
+          </option>
         ))}
       </select>
       {/* {languages.map()} */}

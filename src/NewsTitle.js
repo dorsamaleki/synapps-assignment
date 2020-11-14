@@ -6,7 +6,7 @@ import styles from "./NewsTitle.module.css";
 
 const PAGE_SIZE = 20;
 var getUrl = (page) =>
-  `https://newsapi.org/v2/everything?q=bitcoin&from=2020-11-12&sortBy=publishedAt&page=${page}&pageSize=${PAGE_SIZE}&apiKey=969be8c2e9374ffcb2510f892c53bb04`;
+  `https://newsapi.org/v2/everything?q=bitcoin&from=2020-11-12&sortBy=publishedAt&page=${page}&pageSize=${PAGE_SIZE}&apiKey=07bd893c0bd947fbba9a7ec91ce34cf6`;
 
 export const NewsTitle = (props) => {
   const [news, setNews] = useState([]);
@@ -45,7 +45,7 @@ export const NewsTitle = (props) => {
     if (error) setError(null);
     setLoading(true);
     fetch(
-      `http://newsapi.org/v2/everything?source=${props.selectedSource}&q=apple&from=2020-11-13&to=2020-11-13&sortBy=popularity&apiKey=969be8c2e9374ffcb2510f892c53bb04`
+      `http://newsapi.org/v2/everything?source=${props.selectedSource}&q=apple&from=2020-11-13&to=2020-11-13&sortBy=popularity&apiKey=07bd893c0bd947fbba9a7ec91ce34cf6`
     )
       .then((response) => response.json())
 
