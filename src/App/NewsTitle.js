@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import useScrollInfo from "react-element-scroll-hook";
 import { debounce } from "lodash";
 import qs from "query-string";
-import { API_KEY, NEWS_FOCUS, PAGE_SIZE } from "./constants";
+import { API_KEY, NEWS_FOCUS, PAGE_SIZE } from "../constants/constants";
 import styles from "./NewsTitle.module.css";
-import { News } from "./News";
+import { News } from "./NewsTitle/News";
 
 var getUrl = (page, sources, language, sortBy) =>
   "https://newsapi.org/v2/everything?" +
@@ -27,9 +27,7 @@ export const NewsTitle = (props) => {
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const [scrollInfo, setRef] = useScrollInfo();
-
   const fetchData = debounce((forceFetch) => {
     if (!forceFetch && loading) return;
     if (error) setError(null);
@@ -59,7 +57,6 @@ export const NewsTitle = (props) => {
         setError("Data fetch failed");
       });
   }, 400);
-
   useEffect(() => {
     setNews([]);
     setPage(1);
@@ -67,18 +64,15 @@ export const NewsTitle = (props) => {
     setError(false);
     fetchData(true);
   }, [props.selectedSources, props.selectedLanguage, props.selectedSort]);
-
   const fetchMoreData = () => {
     if (!hasMore) return;
     fetchData();
   };
-
   useEffect(() => {
     if (scrollInfo.y.percentage > 0.8) {
       fetchData();
     }
   }, [scrollInfo.y.percentage]);
-
   return (
     <div ref={setRef} className={styles.root}>
       {news.map((item) => {

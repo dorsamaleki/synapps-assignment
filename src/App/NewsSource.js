@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { uniq } from "lodash";
 import styles from "./NewsSource.module.css";
-import { API_KEY, sortTypes } from "./constants";
-import { CheckboxList } from "./CheckboxList";
+import { API_KEY, sortTypes } from "../constants/constants";
+import { CheckboxList } from "./NewsSource/CheckboxList";
 import Select from "react-select";
+
 var getUrl = (page) => `http://newsapi.org/v2/sources?&apiKey=${API_KEY}`;
 
 export const NewsSource = (props) => {

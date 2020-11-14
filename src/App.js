@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./App.module.css";
-import { defaultSort } from "./constants";
-import { NewsSource } from "./NewsSource";
-import { NewsTitle } from "./NewsTitle.js";
+import { defaultSort } from "./constants/constants";
+import { NewsSource } from "./App/NewsSource";
+import { NewsTitle } from "./App/NewsTitle.js";
 
 export const App = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("all");

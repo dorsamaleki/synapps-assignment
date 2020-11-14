@@ -1,4 +1,3 @@
-import { trimEnd } from "lodash";
 import React from "react";
 import styles from "./CheckboxList.module.css";
 
