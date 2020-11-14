@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import "./App.css";
+import styles from "./App.module.css";
 import { defaultSort } from "./constants";
 import { NewsSource } from "./NewsSource";
 import { NewsTitle } from "./NewsTitle.js";
 
-function App() {
+export const App = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("all");
   const [selectedSort, setSelectedSort] = useState(defaultSort);
   const [selectedSources, setSelectedSources] = useState([]);
-
   const onChange = (value) => {
     const foundIndex = selectedSources.find((item) => item === value);
     if (foundIndex) {
@@ -18,7 +17,7 @@ function App() {
     }
   };
   return (
-    <div className="App">
+    <div className={styles.root}>
       <NewsSource
         setSelectedLanguage={setSelectedLanguage}
         setSelectedSort={setSelectedSort}
@@ -34,6 +33,4 @@ function App() {
       />
     </div>
   );
-}
-
-export default App;
+};

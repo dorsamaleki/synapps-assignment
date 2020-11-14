@@ -8,13 +8,11 @@ var getUrl = (page) => `http://newsapi.org/v2/sources?&apiKey=${API_KEY}`;
 
 export const NewsSource = (props) => {
   const [sourceList, setSourceList] = useState([]);
-
   useEffect(() => {
     fetch(getUrl())
       .then((response) => response.json())
       .then((response) => setSourceList(response.sources));
   }, []);
-
   const languagesList = [
     "all",
     ...uniq(
@@ -23,7 +21,6 @@ export const NewsSource = (props) => {
       }, [])
     ),
   ];
-
   return (
     <div className={styles.root}>
       <div className={styles.sortlabel}>Sort</div>
@@ -33,7 +30,6 @@ export const NewsSource = (props) => {
         value={props.selectedSort}
         className={styles.sort}
       />
-
       <CheckboxList
         items={languagesList.map((language) => ({
           title: language,
