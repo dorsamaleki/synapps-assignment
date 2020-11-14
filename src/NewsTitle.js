@@ -1,12 +1,25 @@
 import React, { useEffect, useState } from "react";
 import useScrollInfo from "react-element-scroll-hook";
 import { debounce } from "lodash";
-import { fakeFetchHelper } from "./fakeFetchHelper";
+import qs from "query-string";
+import { API_KEY, NEWS_FOCUS, PAGE_SIZE } from "./constants";
 import styles from "./NewsTitle.module.css";
+import { News } from "./News";
 
-const PAGE_SIZE = 20;
-var getUrl = (page) =>
-  `https://newsapi.org/v2/everything?q=bitcoin&from=2020-11-12&sortBy=publishedAt&page=${page}&pageSize=${PAGE_SIZE}&apiKey=07bd893c0bd947fbba9a7ec91ce34cf6`;
+var getUrl = (page, sources, language, sortBy) =>
+  "https://newsapi.org/v2/everything?" +
+  qs.stringify(
+    {
+      page,
+      sortBy,
+      q: NEWS_FOCUS,
+      sources: sources && sources.length > 0 ? sources.join(",") : null,
+      language: language && language !== "all" ? language : null,
+      pageSize: PAGE_SIZE,
+      apiKey: API_KEY,
+    },
+    { skipNull: true }
+  );
 
 export const NewsTitle = (props) => {
   const [news, setNews] = useState([]);
@@ -17,40 +30,33 @@ export const NewsTitle = (props) => {
 
   const [scrollInfo, setRef] = useScrollInfo();
 
-  const fetchData = debounce(() => {
-    if (loading) return;
+  const fetchData = debounce((forceFetch) => {
+    if (!forceFetch && loading) return;
     if (error) setError(null);
     setLoading(true);
-    // fakeFetchHelper()
-    fetch(getUrl(page))
+    const selectedPage = forceFetch ? 1 : page;
+    fetch(
+      getUrl(
+        selectedPage,
+        props.selectedSources,
+        props.selectedLanguage,
+        props.selectedSort
+      )
+    )
       .then((response) => response.json())
       .then((data) => {
         setLoading(false);
         if (data.articles.length < PAGE_SIZE) {
           setHasMore(false);
-          return;
         }
         setPage(page + 1);
-        setNews([...news, ...data.articles]);
+        let newNews = [...news, ...data.articles];
+        if (forceFetch) newNews = data.articles;
+        setNews(newNews);
       })
       .catch(() => {
         setLoading(false);
         setError("Data fetch failed");
-      });
-  }, 400);
-  const fetchDataSource = debounce(() => {
-    console.log("from fetchDataSource");
-    console.log(props.selectedSource);
-    if (loading) return;
-    if (error) setError(null);
-    setLoading(true);
-    fetch(
-      `http://newsapi.org/v2/everything?source=${props.selectedSource}&q=apple&from=2020-11-13&to=2020-11-13&sortBy=popularity&apiKey=07bd893c0bd947fbba9a7ec91ce34cf6`
-    )
-      .then((response) => response.json())
-
-      .then((data) => {
-        console.log(data);
       });
   }, 400);
 
@@ -59,16 +65,8 @@ export const NewsTitle = (props) => {
     setPage(1);
     setHasMore(true);
     setError(false);
-    fetchDataSource();
-    console.log("from useEffect");
-    console.log(props.selectedSource);
-  }, [props.selectedSource]);
-
-  useEffect(() => {
-    if (news.length === 0) {
-      fetchData();
-    }
-  }, [news.length === 0]);
+    fetchData(true);
+  }, [props.selectedSources, props.selectedLanguage, props.selectedSort]);
 
   const fetchMoreData = () => {
     if (!hasMore) return;
@@ -84,17 +82,7 @@ export const NewsTitle = (props) => {
   return (
     <div ref={setRef} className={styles.root}>
       {news.map((item) => {
-        return (
-          <div key={item.index} className={styles.news}>
-            <img
-              src={item.urlToImage}
-              alt={item.index}
-              className={styles.image}
-            />
-            <div className={styles.title}>{item.title}</div>
-            <div className={styles.title1}>{item.source.name}</div>
-          </div>
-        );
+        return <News {...item} />;
       })}
       {loading && <div>Loading</div>}
       {!loading && (

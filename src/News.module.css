@@ -1,0 +1,33 @@
+.news {
+  max-width: 650px;
+  display: grid;
+  grid-template-columns: calc(100% - 120px) auto;
+  border: 1px solid grey;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+}
+.left {
+  padding-right: 20px;
+}
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #202124;
+}
+.title1 {
+  font-size: 14px;
+  color: grey;
+  padding-top: 10px;
+}
+.image {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+.image img {
+  min-height: 100%;
+  max-width: 100%;
+  object-fit: cover;
+}

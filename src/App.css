@@ -4,17 +4,6 @@
   bottom: 0;
   right: 0;
   left: 0;
-
-  display: inline-block;
-}
-.sources {
-  text-align: left;
-  display: inline-block;
-  vertical-align: top;
-  width: 600px;
-}
-.titles {
-  text-align: center;
-  vertical-align: top;
-  display: inline-block;
+  display: grid;
+  grid-template-columns: 300px auto;
 }
