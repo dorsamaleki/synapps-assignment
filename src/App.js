@@ -16,8 +16,21 @@ export const App = () => {
       setSelectedSources([...selectedSources, value]);
     }
   };
+  const [selection, setSelection] = useState(false);
+
   return (
     <div className={styles.root}>
+      <div className={styles.bar}>
+        <div
+          onClick={() => {
+            setSelection(!selection);
+          }}
+          className={styles.click}
+        >
+          {selection ? "hide sort and filters" : "sort and filters"}
+        </div>
+      </div>
+
       <NewsSource
         setSelectedLanguage={setSelectedLanguage}
         setSelectedSort={setSelectedSort}
@@ -25,6 +38,8 @@ export const App = () => {
         onChange={onChange}
         selectedLanguage={selectedLanguage}
         selectedSources={selectedSources}
+        className={styles.source}
+        selection={selection}
       />
       <NewsTitle
         selectedSources={selectedSources}

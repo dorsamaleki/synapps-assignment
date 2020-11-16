@@ -1,4 +1,4 @@
-export const API_KEY = "28ca7a060fbc408f807d7a84a16e8f8e";
+export const API_KEY = "f321b7da366c456b8bccf1b4e009bca5";
 export const NEWS_FOCUS = "COVID Vaccine";
 export const PAGE_SIZE = 20;
 

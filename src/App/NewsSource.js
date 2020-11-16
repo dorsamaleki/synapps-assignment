@@ -23,7 +23,7 @@ export const NewsSource = (props) => {
     ),
   ];
   return (
-    <div className={styles.root}>
+    <div className={props.selection ? styles.coul : styles.root}>
       <div className={styles.sortlabel}>Sort</div>
       <Select
         options={sortTypes}
