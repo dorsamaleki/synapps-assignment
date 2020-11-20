@@ -30,7 +30,6 @@ export const App = () => {
           {selection ? "hide sort and filters" : "sort and filters"}
         </div>
       </div>
-
       <NewsSource
         setSelectedLanguage={setSelectedLanguage}
         setSelectedSort={setSelectedSort}
@@ -38,13 +37,13 @@ export const App = () => {
         onChange={onChange}
         selectedLanguage={selectedLanguage}
         selectedSources={selectedSources}
-        className={styles.source}
         selection={selection}
       />
       <NewsTitle
         selectedSources={selectedSources}
         selectedLanguage={selectedLanguage}
         selectedSort={selectedSort}
+        selection={selection}
       />
     </div>
   );

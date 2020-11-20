@@ -74,7 +74,10 @@ export const NewsTitle = (props) => {
     }
   }, [scrollInfo.y.percentage]);
   return (
-    <div ref={setRef} className={styles.root}>
+    <div
+      ref={setRef}
+      className={props.selection ? styles.selection : styles.root}
+    >
       {news.map((item) => {
         return <News {...item} />;
       })}

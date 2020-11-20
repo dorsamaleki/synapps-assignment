@@ -3,3 +3,6 @@
   width: 100%;
   overflow: auto;
 }
+.selection {
+  display: none;
+}

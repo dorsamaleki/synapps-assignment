@@ -14,17 +14,26 @@
 @media only screen and (max-width: 700px) {
   .root {
     grid-template-columns: auto;
+    height: 200%;
   }
+
   .bar {
     border-bottom: 1px solid lightgrey;
     box-shadow: 0 0 3px 1px lightgray;
-    color: darkgrey;
+    color: gray;
     font-size: 18px;
     margin-bottom: 10px;
     display: inline;
     height: 90px;
     box-sizing: border-box;
     padding: 30px;
+    position: sticky;
+    position: -webkit-sticky;
+    background-color: white;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
   }
   .click {
     cursor: pointer;
